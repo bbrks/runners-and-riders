@@ -34,9 +34,20 @@ typedef struct track {
     struct track *next_track;
 } track;
 
+typedef struct course {
+    char identifier[2];
+    int number_of_nodes;
+    int nodes[20]; /* Todo: clean up array size */
+    struct course *next_course;
+} course;
+
 void read_event_file(char *str);
 void read_node_file(char *str);
+void print_node_list(void);
 void read_track_file(char *str);
+void print_track_list(void);
+void read_course_file(char *str);
+void print_course_list(void);
 
 #ifdef	__cplusplus
 }
