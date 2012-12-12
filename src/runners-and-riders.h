@@ -15,20 +15,28 @@ extern "C" {
 #define FILELENGTH_MAX 256
 
 typedef struct {
-	char name[80];
-	char date[80];
-	char time[6];
+    char event_name[80];
+    char event_date[80];
+    char event_time[6];
 } event;
 
-enum node_type {CP, MC, JN};
 typedef struct node {
-	int node_number;
-	enum node_type type;
-	struct node *next_node;
+    int node_number;
+    char node_type[3];
+    struct node *next_node;
 } node;
+
+typedef struct track {
+    int track_number;
+    int start_node;
+    int end_node;
+    int avg_time;
+    struct track *next_track;
+} track;
 
 void read_event_file(char *str);
 void read_node_file(char *str);
+void read_track_file(char *str);
 
 #ifdef	__cplusplus
 }
