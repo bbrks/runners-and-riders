@@ -22,6 +22,4 @@ void read_event_file(char filename[FILELENGTH_MAX]) {
         fgets(the_event.event_time, sizeof(the_event.event_time), file);
     }
     fclose(file);
-
-    return the_event;
 }

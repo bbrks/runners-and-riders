@@ -65,5 +65,4 @@ void read_entrant_file(char filename[FILELENGTH_MAX]) {
             add_to_list(tmp_entrant.entrant_number, tmp_entrant.entrant_course, tmp_entrant.entrant_name);
         }
     }
-    return the_entrant;
 }

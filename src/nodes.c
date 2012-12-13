@@ -64,6 +64,5 @@ void read_node_file(char filename[FILELENGTH_MAX]) {
             add_to_list(tmp_node.node_number, tmp_node.node_type);
         }
     }
-//    return the_node;
 }
 
