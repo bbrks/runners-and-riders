@@ -16,21 +16,19 @@ int main(int argc, char** argv) {
 	/* Todo: implement FILELENGTH_MAX into scanf format */
 	printf("Event file: ");
 	scanf(" %255s", eventfile);
+    read_event_file(eventfile);
 	printf("Node file: ");
 	scanf(" %255s", nodefile);
+    read_node_file(nodefile);
 	printf("Track file: ");
 	scanf(" %255s", trackfile);
+    read_track_file(trackfile);
 	printf("Course file: ");
 	scanf(" %255s", coursefile);
+    read_course_file(coursefile);
 	printf("Entrant file: ");
 	scanf(" %255s", entrantfile);
-
-    read_event_file(eventfile);
-    read_node_file(nodefile);
-    read_track_file(trackfile);
-    read_course_file(coursefile);
     read_entrant_file(entrantfile);
-
 
     printf("--------------------\n");
     print_event_data();
