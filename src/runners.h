@@ -15,9 +15,12 @@ extern "C" {
 
 #define FILELENGTH_MAX 256
 
+    void menu(void);
+
 
 #ifdef	__cplusplus
 }
 #endif
 
 #endif	/* RUNNERS_H */
+
