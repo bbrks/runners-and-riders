@@ -1,10 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "runners-and-riders.h"
+#include "runners.h"
+#include "event_data.h"
 
 static node *head = NULL;
 static node *curr = NULL;
+
+node the_node;
 
 static node* create_list(int node_number, char node_type[3]) {
     node *ptr = (node*)malloc(sizeof(node));
@@ -19,6 +22,7 @@ static node* create_list(int node_number, char node_type[3]) {
     curr = ptr;
     head = ptr;
     return ptr;
+
 }
 
 static node* add_to_list(int node_number, char node_type[3]) {
@@ -43,7 +47,7 @@ static node* add_to_list(int node_number, char node_type[3]) {
 void print_node_list(void) {
     node *ptr = head;
     while (ptr != NULL) {
-        printf("Node: %d\nType: %s\n", ptr->node_number, ptr->node_type);
+        printf("Node: %d Type: %s\n", ptr->node_number, ptr->node_type);
         ptr = ptr->next_node;
     }
     return;
@@ -60,5 +64,6 @@ void read_node_file(char filename[FILELENGTH_MAX]) {
             add_to_list(tmp_node.node_number, tmp_node.node_type);
         }
     }
+//    return the_node;
 }
 
