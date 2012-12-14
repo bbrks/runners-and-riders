@@ -11,7 +11,7 @@
 #include "time_data.h"
 
 /*
- * Reads time file data and checks for disqualifications
+ * Reads time file data
  */
 void read_time_file(char filename[FILE_LENGTH]) {
     FILE *file;
@@ -24,20 +24,19 @@ void read_time_file(char filename[FILE_LENGTH]) {
         char type[TIME_TYPE_LENGTH];
         char time[TIME_LENGTH];
         while (fscanf(file, "%s %d %d %s\n", type, &node, &competitor_id, time) != EOF) {
-            if (!disqualified_entrant(competitor_id)) {
-                if (strcmp(type, "T") == 0) {
-                    update_entrant_location(competitor_id, node, time);
-                    current_time(time);
-                } else if (strcmp(type, "I") == 0) {
-                    disqualify_entrant(competitor_id);
-                } else {
-                    printf("An error occurred somewhere. Is the time file syntax correct?\n");
-                }
+            if (strcmp(type, "T") == 0) {
+                update_entrant_location(competitor_id, node, time);
+                current_time(time);
+            } else {
+                printf("An error occurred somewhere. Is the time file syntax correct?\n");
             }
         }
     }
 }
 
+/*
+ * Function to calculate difference between two times, in minutes
+ */
 int time_diff(char time1[TIME_LENGTH], char time2[TIME_LENGTH]) {
     int t1h, t1m, t2h, t2m;
     sscanf(time1, "%2d:%2d", &t1h, &t1m);

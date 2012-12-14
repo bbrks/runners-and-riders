@@ -94,8 +94,6 @@ void print_current_status(int entrant_number) {
         if (ptr->entrant_number == entrant_number) {
             if (ptr->last_seen == 0) {
                 printf("Entrant \"%s\" has not been seen at any checkpoint yet!\n", ptr->entrant_name);
-            } else if (ptr->last_seen == -1) {
-                printf("Entrant \"%s\" has been disqualified!\n", ptr->entrant_name);
             } else {
                 printf("Entrant \"%s\" was last seen at node %d at %s.\n", ptr->entrant_name, ptr->last_seen, ptr->end_time);
             }
@@ -118,36 +116,6 @@ void update_entrant_location(int entrant_number, int location, char time[TIME_LE
                 strcpy(ptr->start_time, time);
             }
             strcpy(ptr->end_time, time);
-            break;
-        } else {
-            ptr = ptr->next_entrant;
-        }
-    }
-}
-
-/*
- * Disqualify the entrant by setting last_seen to -1
- */
-void disqualify_entrant(int entrant_number) {
-    entrant *ptr = head;
-    while (ptr != NULL) {
-        if (ptr->entrant_number == entrant_number) {
-            ptr->last_seen = -1;
-            break;
-        } else {
-            ptr = ptr->next_entrant;
-        }
-    }
-}
-
-/*
- * Returns 1 if entrant is disqualified
- */
-int disqualified_entrant(int entrant_number) {
-    entrant *ptr = head;
-    while (ptr != NULL) {
-        if (ptr->entrant_number == entrant_number) {
-            return (ptr->last_seen == -1);
             break;
         } else {
             ptr = ptr->next_entrant;

@@ -10,7 +10,6 @@
 extern "C" {
 #endif
 
-
     typedef struct {
         char event_name[80];
         char event_date[80];
@@ -47,7 +46,6 @@ extern "C" {
     void print_track_list(void);
     void read_course_file(char *str);
     void print_course_list(void);
-
 
 #ifdef	__cplusplus
 }

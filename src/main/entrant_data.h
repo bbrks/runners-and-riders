@@ -10,7 +10,6 @@
 extern "C" {
 #endif
 
-
     typedef struct entrant {
         int entrant_number;
         char entrant_course[COURSE_LENGTH];
@@ -26,13 +25,10 @@ extern "C" {
     void print_entrant_list(void);
     void print_current_status(int entrant_number);
     void update_entrant_location(int entrant_number, int node, char *str);
-    void disqualify_entrant(int entrant_number);
-    int  disqualified_entrant(int entrant_number);
     void print_unstarted_entrants(void);
     void print_on_course_entrants(void);
     void print_finished_entrants(void);
     void print_results_table(void);
-
 
 #ifdef	__cplusplus
 }

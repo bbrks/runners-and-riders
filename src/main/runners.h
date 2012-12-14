@@ -10,7 +10,6 @@
 extern "C" {
 #endif
 
-
 #define FILE_LENGTH 256
 #define TIME_LENGTH 6
 #define NAME_LENGTH 50
@@ -20,7 +19,6 @@ extern "C" {
 #define COURSE_NODE_MAX 20
 
     void menu(void);
-
 
 #ifdef	__cplusplus
 }

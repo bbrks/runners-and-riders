@@ -10,7 +10,7 @@
 #include "event_data.h"
 #include "entrant_data.h"
 
-#define DEBUG
+/*#define DEBUG*/
 
 int main(int argc, char** argv) {
 
@@ -21,11 +21,11 @@ int main(int argc, char** argv) {
 	char entrantfile[FILE_LENGTH];
 
 #ifdef DEBUG
-    strcpy(&eventfile, "/Users/ben/Dropbox/Aber/CS237/runners-and-riders/data/main/name.txt");
-    strcpy(&nodefile, "/Users/ben/Dropbox/Aber/CS237/runners-and-riders/data/main/nodes.txt");
-    strcpy(&trackfile, "/Users/ben/Dropbox/Aber/CS237/runners-and-riders/data/main/tracks.txt");
-    strcpy(&coursefile, "/Users/ben/Dropbox/Aber/CS237/runners-and-riders/data/main/courses.txt");
-    strcpy(&entrantfile, "/Users/ben/Dropbox/Aber/CS237/runners-and-riders/data/main/entrants.txt");
+    strcpy(&eventfile, "../../data/main/name.txt");
+    strcpy(&nodefile, "../../data/main/nodes.txt");
+    strcpy(&trackfile, "../../data/main/tracks.txt");
+    strcpy(&coursefile, "../../data/main/courses.txt");
+    strcpy(&entrantfile, "../../data/main/entrants.txt");
 #else
 	printf("Event file: ");
 	scanf(" %255s", eventfile);
@@ -58,7 +58,6 @@ int main(int argc, char** argv) {
 #endif
 
     menu();
-
 	return (EXIT_SUCCESS);
 
 }

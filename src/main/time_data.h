@@ -10,10 +10,8 @@
 extern "C" {
 #endif
 
-
     void read_time_file(char *str);
     int time_diff(char *str, char *str2);
-
 
 #ifdef	__cplusplus
 }
