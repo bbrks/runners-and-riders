@@ -1,3 +1,8 @@
+/*
+ * File:   main.c
+ * Author: Ben Brooks (beb12@aber.ac.uk)
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -5,17 +10,17 @@
 #include "event_data.h"
 #include "entrant_data.h"
 
-#define AUTOREADFILES
+#define DEBUG
 
 int main(int argc, char** argv) {
 
-	char eventfile[FILELENGTH_MAX];
-	char nodefile[FILELENGTH_MAX];
-	char trackfile[FILELENGTH_MAX];
-	char coursefile[FILELENGTH_MAX];
-	char entrantfile[FILELENGTH_MAX];
+	char eventfile[FILE_LENGTH];
+	char nodefile[FILE_LENGTH];
+	char trackfile[FILE_LENGTH];
+	char coursefile[FILE_LENGTH];
+	char entrantfile[FILE_LENGTH];
 
-# ifdef AUTOREADFILES
+#ifdef DEBUG
     strcpy(&eventfile, "/Users/ben/Dropbox/Aber/CS237/runners-and-riders/data/main/name.txt");
     strcpy(&nodefile, "/Users/ben/Dropbox/Aber/CS237/runners-and-riders/data/main/nodes.txt");
     strcpy(&trackfile, "/Users/ben/Dropbox/Aber/CS237/runners-and-riders/data/main/tracks.txt");
@@ -40,9 +45,8 @@ int main(int argc, char** argv) {
     read_course_file(coursefile);
     read_entrant_file(entrantfile);
 
-    printf("--------------------\n");
-    print_event_data();
-    printf("--------------------\n");
+#ifdef DEBUG
+    printf("--BEGIN DEBUG INFO--\n");
     print_node_list();
     printf("--------------------\n");
     print_track_list();
@@ -50,7 +54,8 @@ int main(int argc, char** argv) {
     print_course_list();
     printf("--------------------\n");
     print_entrant_list();
-    printf("--------------------\n");
+    printf("--END DEBUG INFO-----\n\n");
+#endif
 
     menu();
 
@@ -61,8 +66,15 @@ int main(int argc, char** argv) {
 void menu() {
 	int runloop = 1;
 	while (runloop) {
-		int selection = NULL;
-
+		int selection = 0;
+        int entrant_id = 0;
+        int checkpoint_id = 0;
+        char time[TIME_LENGTH];
+        char timefile[FILE_LENGTH];
+        int diff = 0;
+        printf("--------------------\n");
+        print_event_data();
+        printf("--------------------\n");
 		printf("  1. Query the current location of a competitor\n");
 		printf("  2. List competitors which haven't started yet\n");
 		printf("  3. List competitors which are out on the course\n");
@@ -77,10 +89,37 @@ void menu() {
 
 	    switch (selection) {
 		case 1:
+            printf("Enter Entrant ID: ");
+            scanf("%d", &entrant_id);
+            print_current_status(entrant_id);
 			break;
 		case 2:
+            print_unstarted_entrants();
 			break;
-		case 0:
+        case 3:
+            print_on_course_entrants();
+            break;
+        case 4:
+            print_finished_entrants();
+            break;
+        case 5:
+            printf("Enter Entrant ID: ");
+            scanf("%d", &entrant_id);
+            printf("Enter Checkpoint Number: ");
+            scanf("%d", &checkpoint_id);
+            printf("Enter Time: ");
+            scanf(" %5s", time);
+            update_entrant_location(entrant_id, checkpoint_id, time);
+            break;
+        case 6:
+            printf("Enter time file: ");
+            scanf(" %255s", timefile);
+            read_time_file(timefile);
+            break;
+        case 7:
+            print_results_table();
+            break;
+        case 0:
 			printf("Bye Bye!\n");
 			runloop = 0;
 			break;

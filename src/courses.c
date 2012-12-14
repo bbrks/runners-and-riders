@@ -1,3 +1,8 @@
+/*
+ * File:   courses.c
+ * Author: Ben Brooks (beb12@aber.ac.uk)
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -7,7 +12,7 @@
 static course *head = NULL;
 static course *curr = NULL;
 
-static course* create_list(char course_identifier[2], int course_number_of_nodes, int course_nodes[20]) {
+static course* create_list(char course_identifier[COURSE_LENGTH], int course_number_of_nodes, int course_nodes[COURSE_NODE_MAX]) {
     course *ptr = (course*)malloc(sizeof(course));
     if (NULL == ptr) {
         return NULL;
@@ -23,7 +28,7 @@ static course* create_list(char course_identifier[2], int course_number_of_nodes
     return ptr;
 }
 
-static course* add_to_list(char course_identifier[2], int course_number_of_nodes, int course_nodes[20]) {
+static course* add_to_list(char course_identifier[COURSE_LENGTH], int course_number_of_nodes, int course_nodes[COURSE_NODE_MAX]) {
     if (NULL == head) {
         return (create_list(course_identifier, course_number_of_nodes, course_nodes));
     }
@@ -43,6 +48,9 @@ static course* add_to_list(char course_identifier[2], int course_number_of_nodes
     return ptr;
 }
 
+/*
+ * Debug function to print courses
+ */
 void print_course_list(void) {
     course *ptr = head;
     while (ptr != NULL) {
@@ -57,7 +65,10 @@ void print_course_list(void) {
     return;
 }
 
-void read_course_file(char filename[FILELENGTH_MAX]) {
+/*
+ * Read course file data and adds to linked list
+ */
+void read_course_file(char filename[FILE_LENGTH]) {
     FILE *file;
     file = fopen(filename, "r");
     if (!file) {
@@ -78,3 +89,17 @@ void read_course_file(char filename[FILELENGTH_MAX]) {
     }
 }
 
+/*
+ * Returns the starting checkpoint of a course
+ */
+int get_first_node(char course_identifier[COURSE_LENGTH]) {
+    course *ptr = head;
+    int first_node = 0;
+    while (ptr != NULL) {
+        if (strcmp(course_identifier, ptr->course_identifier) == 0) {
+            first_node = ptr->course_nodes[0];
+        }
+        ptr = ptr->next_course;
+    }
+    return first_node;
+}

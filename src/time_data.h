@@ -1,8 +1,6 @@
 /*
  * File:   time_data.h
- * Author: ben
- *
- * Created on 12 December 2012, 05:03
+ * Author: Ben Brooks (beb12@aber.ac.uk)
  */
 
 #ifndef TIME_DATA_H
@@ -13,7 +11,8 @@ extern "C" {
 #endif
 
 
-
+    void read_time_file(char *str);
+    int time_diff(char *str, char *str2);
 
 
 #ifdef	__cplusplus
@@ -21,3 +20,4 @@ extern "C" {
 #endif
 
 #endif	/* TIME_DATA_H */
+

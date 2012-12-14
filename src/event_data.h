@@ -1,8 +1,6 @@
 /*
  * File:   event_data.h
- * Author: ben
- *
- * Created on 08 December 2012, 17:15
+ * Author: Ben Brooks (beb12@aber.ac.uk)
  */
 
 #ifndef RUNNERS_AND_RIDERS_H
@@ -42,6 +40,7 @@ extern "C" {
 
     void read_event_file(char *str);
     void print_event_data(void);
+    void current_time(char *str);
     void read_node_file(char *str);
     void print_node_list(void);
     void read_track_file(char *str);

@@ -1,3 +1,8 @@
+/*
+ * File:   tracks.c
+ * Author: Ben Brooks (beb12@aber.ac.uk)
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -45,6 +50,9 @@ static track* add_to_list(int track_number, int track_start_node, int track_end_
     return ptr;
 }
 
+/*
+ * Debug function to print tracks
+ */
 void print_track_list(void) {
     track *ptr = head;
     while (ptr != NULL) {
@@ -54,7 +62,10 @@ void print_track_list(void) {
     return;
 }
 
-void read_track_file(char filename[FILELENGTH_MAX]) {
+/*
+ * Read course track data and adds to linked list
+ */
+void read_track_file(char filename[FILE_LENGTH]) {
     FILE *file;
     file = fopen(filename, "r");
     if (!file) {

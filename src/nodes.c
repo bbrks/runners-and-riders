@@ -1,3 +1,8 @@
+/*
+ * File:   nodes.c
+ * Author: Ben Brooks (beb12@aber.ac.uk)
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -9,7 +14,7 @@ static node *curr = NULL;
 
 node the_node;
 
-static node* create_list(int node_number, char node_type[3]) {
+static node* create_list(int node_number, char node_type[NODE_TYPE_LENGTH]) {
     node *ptr = (node*)malloc(sizeof(node));
     if (NULL == ptr) {
         return NULL;
@@ -25,7 +30,7 @@ static node* create_list(int node_number, char node_type[3]) {
 
 }
 
-static node* add_to_list(int node_number, char node_type[3]) {
+static node* add_to_list(int node_number, char node_type[NODE_TYPE_LENGTH]) {
     if (NULL == head) {
         return (create_list(node_number, node_type));
     }
@@ -44,6 +49,9 @@ static node* add_to_list(int node_number, char node_type[3]) {
     return ptr;
 }
 
+/*
+ * Debug function to print checkpoints
+ */
 void print_node_list(void) {
     node *ptr = head;
     while (ptr != NULL) {
@@ -53,7 +61,10 @@ void print_node_list(void) {
     return;
 }
 
-void read_node_file(char filename[FILELENGTH_MAX]) {
+/*
+ * Read node file data and adds to linked list
+ */
+void read_node_file(char filename[FILE_LENGTH]) {
     FILE *file;
     file = fopen(filename, "r");
     if (!file) {
