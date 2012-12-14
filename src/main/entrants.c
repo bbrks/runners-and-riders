@@ -8,6 +8,8 @@
 #include <string.h>
 #include "runners.h"
 #include "entrant_data.h"
+#include "event_data.h"
+#include "time_data.h"
 
 static entrant *head = NULL;
 static entrant *curr = NULL;

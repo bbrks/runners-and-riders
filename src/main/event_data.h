@@ -46,6 +46,7 @@ extern "C" {
     void print_track_list(void);
     void read_course_file(char *str);
     void print_course_list(void);
+    int get_first_node(char *str);
 
 #ifdef	__cplusplus
 }

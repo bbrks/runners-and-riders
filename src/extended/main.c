@@ -9,6 +9,7 @@
 #include "runners.h"
 #include "event_data.h"
 #include "entrant_data.h"
+#include "time_data.h"
 
 /*#define DEBUG*/
 
