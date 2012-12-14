@@ -1,10 +1,14 @@
-\title{Runners and Riders\\A CS237 Assignment}
+\title{Runners and Riders\\A CS23710 Assignment}
 \author{Ben Brooks (beb12@aber.ac.uk)}
 \date{Due date: 2012-12-14 16:00}
+
 \documentclass[pdftex,12pt,a4paper]{article}
 \usepackage{titling}
 \setlength{\droptitle}{-2in}
 
+% Prevent page breaks within sections/paragraphs
+\widowpenalties 1 10000
+\raggedbottom
 
 \begin{document}
 
@@ -323,7 +327,8 @@ event the_event;
  * Function to print event data
  */
 void print_event_data(void) {
-    printf("%s%s%s\n", the_event.event_name, the_event.event_date, the_event.event_time);
+    printf("%s%s%s\n", the_event.event_name, the_event.event_date,
+    	   the_event.event_time);
 }
 
 /*
@@ -334,11 +339,15 @@ void read_event_file(char filename[FILE_LENGTH]) {
 
     file = fopen(filename, "r");
     if (!file) {
-        fprintf(stderr, "Can't open file \"%s\"! (Does it exist?)\n", filename);
+        fprintf(stderr, "Can't open file \"%s\"! (Does it exist?)\n",
+        		filename);
     } else {
-        fgets(the_event.event_name, sizeof(the_event.event_name), file);
-        fgets(the_event.event_date, sizeof(the_event.event_date), file);
-        fgets(the_event.event_time, sizeof(the_event.event_time), file);
+        fgets(the_event.event_name,
+        	  sizeof(the_event.event_name), file);
+        fgets(the_event.event_date,
+        	  sizeof(the_event.event_date), file);
+        fgets(the_event.event_time,
+        	  sizeof(the_event.event_time), file);
     }
     fclose(file);
 }
@@ -368,7 +377,8 @@ static node *curr = NULL;
 
 node the_node;
 
-static node* create_list(int node_number, char node_type[NODE_TYPE_LENGTH]) {
+static node* create_list(int node_number,
+						 char node_type[NODE_TYPE_LENGTH]) {
     node *ptr = (node*)malloc(sizeof(node));
     if (NULL == ptr) {
         return NULL;
@@ -384,7 +394,8 @@ static node* create_list(int node_number, char node_type[NODE_TYPE_LENGTH]) {
 
 }
 
-static node* add_to_list(int node_number, char node_type[NODE_TYPE_LENGTH]) {
+static node* add_to_list(int node_number,
+						 char node_type[NODE_TYPE_LENGTH]) {
     if (NULL == head) {
         return (create_list(node_number, node_type));
     }
@@ -422,10 +433,12 @@ void read_node_file(char filename[FILE_LENGTH]) {
     FILE *file;
     file = fopen(filename, "r");
     if (!file) {
-        fprintf(stderr, "Can't open the file \"%s\"! (Does it exist?)\n", filename);
+        fprintf(stderr, "Can't open the file \"%s\"!
+        				(Does it exist?)\n", filename);
     } else {
         node tmp_node;
-        while (fscanf(file, "%d %s\n", &tmp_node.node_number, tmp_node.node_type) != EOF) {
+        while (fscanf(file, "%d %s\n", &tmp_node.node_number,
+        	   tmp_node.node_type) != EOF) {
             add_to_list(tmp_node.node_number, tmp_node.node_type);
         }
     }
@@ -447,7 +460,8 @@ void read_node_file(char filename[FILE_LENGTH]) {
 static track *head = NULL;
 static track *curr = NULL;
 
-static track* create_list(int track_number, int track_start_node, int track_end_node, int track_avg_time) {
+static track* create_list(int track_number, int track_start_node,
+						  int track_end_node, int track_avg_time) {
     track *ptr = (track*)malloc(sizeof(track));
     if (NULL == ptr) {
         return NULL;
@@ -464,9 +478,11 @@ static track* create_list(int track_number, int track_start_node, int track_end_
     return ptr;
 }
 
-static track* add_to_list(int track_number, int track_start_node, int track_end_node, int track_avg_time) {
+static track* add_to_list(int track_number, int track_start_node,
+						  int track_end_node, int track_avg_time) {
     if (NULL == head) {
-        return (create_list(track_number, track_start_node, track_end_node, track_avg_time));
+        return (create_list(track_number, track_start_node,
+        					track_end_node, track_avg_time));
     }
 
     track *ptr = (track*)malloc(sizeof(track));
@@ -491,7 +507,9 @@ static track* add_to_list(int track_number, int track_start_node, int track_end_
 void print_track_list(void) {
     track *ptr = head;
     while (ptr != NULL) {
-        printf("Track: %d Start: %d End: %d Avg Time: %d\n", ptr->track_number, ptr->track_start_node, ptr->track_end_node, ptr->track_avg_time);
+        printf("Track: %d Start: %d End: %d Avg Time: %d\n",
+        		ptr->track_number, ptr->track_start_node,
+        		ptr->track_end_node, ptr->track_avg_time);
         ptr = ptr->next_track;
     }
     return;
@@ -504,11 +522,16 @@ void read_track_file(char filename[FILE_LENGTH]) {
     FILE *file;
     file = fopen(filename, "r");
     if (!file) {
-        fprintf(stderr, "Can't open the file \"%s\"! (Does it exist?)\n", filename);
+        fprintf(stderr, "Can't open the file \"%s\"!
+        				(Does it exist?)\n", filename);
     } else {
         track tmp_track;
-        while (fscanf(file, "%d %d %d %d\n", &tmp_track.track_number, &tmp_track.track_start_node, &tmp_track.track_end_node, &tmp_track.track_avg_time) != EOF) {
-            add_to_list(tmp_track.track_number, tmp_track.track_start_node, tmp_track.track_end_node, tmp_track.track_avg_time);
+        while (fscanf(file, "%d %d %d %d\n", &tmp_track.track_number,
+        &tmp_track.track_start_node, &tmp_track.track_end_node,
+        &tmp_track.track_avg_time) != EOF) {
+            add_to_list(tmp_track.track_number,
+            tmp_track.track_start_node, tmp_track.track_end_node,
+            tmp_track.track_avg_time);
         }
     }
 }
@@ -529,7 +552,9 @@ void read_track_file(char filename[FILE_LENGTH]) {
 static course *head = NULL;
 static course *curr = NULL;
 
-static course* create_list(char course_identifier[COURSE_LENGTH], int course_number_of_nodes, int course_nodes[COURSE_NODE_MAX]) {
+static course* create_list(char course_identifier[COURSE_LENGTH],
+						   int course_number_of_nodes,
+						   int course_nodes[COURSE_NODE_MAX]) {
     course *ptr = (course*)malloc(sizeof(course));
     if (NULL == ptr) {
         return NULL;
@@ -545,9 +570,12 @@ static course* create_list(char course_identifier[COURSE_LENGTH], int course_num
     return ptr;
 }
 
-static course* add_to_list(char course_identifier[COURSE_LENGTH], int course_number_of_nodes, int course_nodes[COURSE_NODE_MAX]) {
+static course* add_to_list(char course_identifier[COURSE_LENGTH],
+						   int course_number_of_nodes,
+						   int course_nodes[COURSE_NODE_MAX]) {
     if (NULL == head) {
-        return (create_list(course_identifier, course_number_of_nodes, course_nodes));
+        return (create_list(course_identifier, course_number_of_nodes,
+        		course_nodes));
     }
 
     course *ptr = (course*)malloc(sizeof(course));
@@ -571,7 +599,8 @@ static course* add_to_list(char course_identifier[COURSE_LENGTH], int course_num
 void print_course_list(void) {
     course *ptr = head;
     while (ptr != NULL) {
-        printf("Course: %s Number of nodes: %d Nodes: ", ptr->course_identifier, ptr->course_number_of_nodes);
+        printf("Course: %s Number of nodes: %d Nodes: ",
+        		ptr->course_identifier, ptr->course_number_of_nodes);
         int i;
         for (i=0;i<ptr->course_number_of_nodes;i++) {
             printf("%d ", ptr->course_nodes[i]);
@@ -589,11 +618,14 @@ void read_course_file(char filename[FILE_LENGTH]) {
     FILE *file;
     file = fopen(filename, "r");
     if (!file) {
-        fprintf(stderr, "Can't open the file \"%s\"! (Does it exist?)\n", filename);
+        fprintf(stderr, "Can't open the file \"%s\"!
+        		(Does it exist?)\n", filename);
     } else {
         course tmp_course;
         char tmpstring[256];
-        while (fscanf(file, "%s %d %[0-9 ]\n", tmp_course.course_identifier, &tmp_course.course_number_of_nodes, tmpstring) != EOF) {
+        while (fscanf(file, "%s %d %[0-9 ]\n",
+        		tmp_course.course_identifier,
+        		&tmp_course.course_number_of_nodes, tmpstring) != EOF) {
             char * pch;
             pch = strtok(tmpstring, " ");
             int i;
@@ -601,7 +633,9 @@ void read_course_file(char filename[FILE_LENGTH]) {
                 tmp_course.course_nodes[i] = atoi(pch);
                 pch = strtok(NULL, " ");
             }
-            add_to_list(tmp_course.course_identifier, tmp_course.course_number_of_nodes, tmp_course.course_nodes);
+            add_to_list(tmp_course.course_identifier,
+            		tmp_course.course_number_of_nodes,
+            		tmp_course.course_nodes);
         }
     }
 }
@@ -641,7 +675,9 @@ static entrant *curr = NULL;
 
 entrant the_entrant;
 
-static entrant* create_list(int entrant_number, char entrant_course[COURSE_LENGTH], char entrant_name[NAME_LENGTH]) {
+static entrant* create_list(int entrant_number,
+							char entrant_course[COURSE_LENGTH],
+							char entrant_name[NAME_LENGTH]) {
     entrant *ptr = (entrant*)malloc(sizeof(entrant));
     if (NULL == ptr) {
         return NULL;
@@ -661,9 +697,11 @@ static entrant* create_list(int entrant_number, char entrant_course[COURSE_LENGT
     return ptr;
 }
 
-static entrant* add_to_list(int entrant_number, char entrant_course[COURSE_LENGTH], char entrant_name[NAME_LENGTH]) {
+static entrant* add_to_list(int entrant_number,
+char entrant_course[COURSE_LENGTH], char entrant_name[NAME_LENGTH]) {
     if (NULL == head) {
-        return (create_list(entrant_number, entrant_course, entrant_name));
+        return (create_list(entrant_number, entrant_course,
+        					entrant_name));
     }
 
     entrant *ptr = (entrant*)malloc(sizeof(entrant));
@@ -691,7 +729,10 @@ static entrant* add_to_list(int entrant_number, char entrant_course[COURSE_LENGT
 void print_entrant_list(void) {
     entrant *ptr = head;
     while (ptr != NULL) {
-        printf("Entrant Number: %d Course: %s Name: %s Last Seen: %d Start Time: %s End Time: %s\n", ptr->entrant_number, ptr->entrant_course, ptr->entrant_name, ptr->last_seen, ptr->start_time, ptr->end_time);
+        printf("Entrant Number: %d Course: %s Name: %s Last Seen: %d
+        		Start Time: %s End Time: %s\n", ptr->entrant_number,
+        		ptr->entrant_course, ptr->entrant_name, ptr->last_seen,
+        		ptr->start_time, ptr->end_time);
         ptr = ptr->next_entrant;
     }
 }
@@ -703,11 +744,15 @@ void read_entrant_file(char filename[FILE_LENGTH]) {
     FILE *file;
     file = fopen(filename, "r");
     if (!file) {
-        fprintf(stderr, "Can't open the file \"%s\"! (Does it exist?)\n", filename);
+        fprintf(stderr, "Can't open the file \"%s\"!
+        				 (Does it exist?)\n", filename);
     } else {
         entrant tmp_entrant;
-        while (fscanf(file, "%d %1s %[a-zA-Z ]\n", &tmp_entrant.entrant_number, tmp_entrant.entrant_course, tmp_entrant.entrant_name) != EOF) {
-            add_to_list(tmp_entrant.entrant_number, tmp_entrant.entrant_course, tmp_entrant.entrant_name);
+        while (fscanf(file, "%d %1s %[a-zA-Z ]\n",
+        &tmp_entrant.entrant_number, tmp_entrant.entrant_course,
+        tmp_entrant.entrant_name) != EOF) {
+            add_to_list(tmp_entrant.entrant_number,
+            tmp_entrant.entrant_course, tmp_entrant.entrant_name);
         }
     }
 }
@@ -720,9 +765,11 @@ void print_current_status(int entrant_number) {
     while (ptr != NULL) {
         if (ptr->entrant_number == entrant_number) {
             if (ptr->last_seen == 0) {
-                printf("Entrant \"%s\" has not been seen at any checkpoint yet!\n", ptr->entrant_name);
+                printf("Entrant \"%s\" has not been seen at any
+                checkpoint yet!\n", ptr->entrant_name);
             } else {
-                printf("Entrant \"%s\" was last seen at node %d at %s.\n", ptr->entrant_name, ptr->last_seen, ptr->end_time);
+                printf("Entrant \"%s\" was last seen at node %d at
+                %s.\n", ptr->entrant_name, ptr->last_seen, ptr->end_time);
             }
             break;
         } else {
@@ -734,7 +781,8 @@ void print_current_status(int entrant_number) {
 /*
  * Updates the specified entrant's last seen location
  */
-void update_entrant_location(int entrant_number, int location, char time[TIME_LENGTH]) {
+void update_entrant_location(int entrant_number, int location,
+							 char time[TIME_LENGTH]) {
     entrant *ptr = head;
     while (ptr != NULL) {
         if (ptr->entrant_number == entrant_number) {
@@ -774,7 +822,8 @@ void print_on_course_entrants(void) {
     printf("Competitor ID\tName\t\t\tCheckpoint\tTime\n-----------------------------------------------------------------\n");
     while (ptr != NULL) {
         if (ptr->last_seen != 0 && ptr->last_seen != ptr->first_node) {
-            printf("%d\t\t%s\t\t%d\t%s\n", ptr->entrant_number, ptr->entrant_name, ptr->last_seen, ptr->end_time);
+            printf("%d\t\t%s\t\t%d\t%s\n", ptr->entrant_number,
+            		ptr->entrant_name, ptr->last_seen, ptr->end_time);
         }
         ptr = ptr->next_entrant;
     }
@@ -788,8 +837,10 @@ void print_finished_entrants(void) {
     printf("Finished entrants\n-----------------------------------------------------------------\n");
     printf("Competitor ID\tName\t\t\tFinished at\n-----------------------------------------------------------------\n");
     while (ptr != NULL) {
-        if (ptr->first_node == ptr->last_seen && time_diff(ptr->start_time, ptr->end_time) > 0) {
-            printf("%d\t\t%s\t\t%s\n", ptr->entrant_number, ptr->entrant_name, ptr->end_time);
+        if (ptr->first_node == ptr->last_seen &&
+        	time_diff(ptr->start_time, ptr->end_time) > 0) {
+            printf("%d\t\t%s\t\t%s\n", ptr->entrant_number,
+            		ptr->entrant_name, ptr->end_time);
         }
         ptr = ptr->next_entrant;
     }
@@ -804,9 +855,11 @@ void print_results_table(void) {
     printf("Results\n-----------------------------------------------------------------\n");
     printf("Competitor ID\tName\t\t\tTime Taken\n-----------------------------------------------------------------\n");
     while (ptr != NULL) {
-        if (ptr->first_node == ptr->last_seen && time_diff(ptr->start_time, ptr->end_time) > 0) {
+        if (ptr->first_node == ptr->last_seen &&
+        	time_diff(ptr->start_time, ptr->end_time) > 0) {
             totaltime = time_diff(ptr->start_time, ptr->end_time);
-            printf("%d\t\t%s\t\t%d Minutes\n", ptr->entrant_number, ptr->entrant_name, totaltime);
+            printf("%d\t\t%s\t\t%d Minutes\n", ptr->entrant_number,
+            		ptr->entrant_name, totaltime);
         }
         ptr = ptr->next_entrant;
     }
@@ -834,18 +887,21 @@ void read_time_file(char filename[FILE_LENGTH]) {
     FILE *file;
     file = fopen(filename, "r");
     if (!file) {
-        fprintf(stderr, "Can't open the file \"%s\"! (Does it exist?)\n", filename);
+        fprintf(stderr, "Can't open the file \"%s\"!
+        				(Does it exist?)\n", filename);
     } else {
         int node = 0;
         int competitor_id = 0;
         char type[TIME_TYPE_LENGTH];
         char time[TIME_LENGTH];
-        while (fscanf(file, "%s %d %d %s\n", type, &node, &competitor_id, time) != EOF) {
+        while (fscanf(file, "%s %d %d %s\n", type, &node,
+        &competitor_id, time) != EOF) {
             if (strcmp(type, "T") == 0) {
                 update_entrant_location(competitor_id, node, time);
                 current_time(time);
             } else {
-                printf("An error occurred somewhere. Is the time file syntax correct?\n");
+                printf("An error occurred somewhere.
+                		Is the time file syntax correct?\n");
             }
         }
     }
@@ -970,30 +1026,39 @@ Choose an option: 0
 Bye Bye!
 \end{verbatim}
 
-\section{Design Decisions}
-\subsection{Blah}
-blah
-\subsection{Blah2}
-blah
-\subsection{Blah3}
-blah
-\subsection{Blah4}
-blah
-
 \section{Testing}
-\begin{tabular}{| l | l | l | l | l | l |}
+\begin{tabular*}{16cm}{| p{.5cm} | p{2cm} | p{2cm} | p{4cm} | p{4cm} | p{1cm} |}
 \hline
-Test ID & Description & Input & Output & Expected & Pass \\
+ID & Description & Input & Output & Expected & Pass \\
 \hline
-1 & blah & input & Output & blah & Yes \\
+1 & Enter a non-existent file & qwerty & Can't open file "qwerty"! (Does it exist?) & Can't open file "asd"! (Does it exist?) & Yes \\
 \hline
-2 & blah & input & Output & blah & No \\
+2 & Enter an existing file & nodes.txt & No output & No output & Yes \\
 \hline
-3 & blah & input  & Output & blah & Yes \\
+3 & Enter an invalid menu choice & h & Bye Bye! & Bye Bye! & Yes \\
 \hline
-\end{tabular}
+3 & Enter an invalid menu choice & 8 & Invalid Selection! & Invalid Selection! & Yes \\
+\hline
+4 & Enter a valid menu choice & 1 & Choose an option: 1 Enter Entrant ID: 3 & Choose an option: 1 Enter Entrant ID: 3 & Yes \\
+\hline
+4 & Quit program & 0 & Bye Bye! & Bye Bye! & Yes \\
+\hline
+\end{tabular*}
+
+\newpage
+
+\section{Design Decisions}
+\paragraph{}Before starting this assignment I had a rough idea of how I would read in the data files and store them. I had planned on using linked lists for everything as it allows for greater flexibility with regards to data set sizes than arrays when using C. I started off by reading in the first data file, name.txt. This contains the name, date and starting time of the event. From there I could then use structures for nodes, tracks, courses and entrants.
+\paragraph{}Most of my C files contain the same basic structure for a linked list, they have a few static functions for adding to/creating a list and a few external functions for manipulating the data stored in the list. I feel like this could have probably been achieved in a more efficient way with less code duplication, but given time constraints and my unfamiliarity with C I felt more comfortable doing it the way I did.
 
 \section{Conclusion}
-blah
+\paragraph{}I feel I had a very reasonable go at the main mission, and attempted some of the extended mission with what little time I had left. I ensured my program compiles without any warnings in both the GNU and Solaris compilers and ran without any segfaults or strange errors.
+\paragraph{}Throughout development, I used a private Git repository hosted on GitHub. This ensured the entirety of my program was version controlled and I was able to revert back to a previous revision if things went wrong. Just after I finalise my handin, I'm going to create a branch so that I can continue to work on this program after it has been submitted for my own personal project. After the assignment is marked, I plan on making this repository publicly viewable and serve as a portfolio item.
+
+\begin{thebibliography}{1}
+\bibitem{} P. Prinz and U. Kirch-Prinz {\em The C Pocket Reference} 2002
+\bibitem{} Prinz and Crawford {\em C In a Nutshell} 2005
+\bibitem{} Singly linked lists in C {\em http://www.cprogramming.com/tutorial/c/lesson15.html}
+\end{thebibliography}
 
 \end{document}
