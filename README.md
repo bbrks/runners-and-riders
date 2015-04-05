@@ -10,8 +10,11 @@ Compilation
 Simply run
 
     cc *.c
-    
+
 or
 
     gcc *.c
-    
+
+## License
+
+This project is released under the [MIT License](LICENSE)
